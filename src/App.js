@@ -1,42 +1,15 @@
 import { useState } from "react";
+import ButtonChange from "./ButtonChange";
 import "./App.css";
+import SummaryForm from "./pages/summary/SummaryForm";
 
-export function replaceCamelWithSpaces(colorName) {
-  return colorName.replace(/\B([A-Z])\B/g, " $1");
-  // if you find a capital letter in a middle of a word
-  // /g even if multiple times
-  // replace it with whateever letter you have,
-  // preceeded by a space
-}
+//npm install eslint-plugin-testing-library eslint-plugin-jest
 
 function App() {
-  const [buttonColor, setButtonColor] = useState("red");
-  const [disabled, setDisabled] = useState(false);
-  const [gray, setGray] = useState("");
-  const newButtonColor = buttonColor === "red" ? "blue" : "red";
-  const evaluation = gray === "" ? "gray" : "";
-
   return (
     <div>
-      <button
-        style={{ backgroundColor: buttonColor }}
-        onClick={() => setButtonColor(newButtonColor)}
-        disabled={disabled}
-        className={gray}
-      >
-        Changed to {buttonColor}
-      </button>
-
-      <input
-        type="checkbox"
-        onClick={(e) => {
-          setDisabled(e.target.checked);
-          setGray(evaluation);
-        }}
-        id="enabler"
-        defaultChecked={disabled}
-        aria-checked={disabled}
-      />
+      <ButtonChange />
+      <SummaryForm />
     </div>
   );
 }
