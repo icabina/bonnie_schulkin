@@ -5,7 +5,7 @@ import Popover from "react-bootstrap/Popover";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 
 export default function SummaryForm({ setOrderPhase }) {
-  const [disabled, setDisabled] = useState(false);
+  const [tcChecked, setTcChecked] = useState(false);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -39,12 +39,12 @@ export default function SummaryForm({ setOrderPhase }) {
       <Form.Group controlId="terms-and-conditions">
         <Form.Check
           type="checkbox"
-          checked={!disabled}
-          onChange={(e) => setDisabled(!e.target.checked)}
+          checked={tcChecked}
+          onChange={(e) => setTcChecked(e.target.checked)}
           label={checkboxLabel}
         />
       </Form.Group>
-      <Button variant="primary" type="submit" disabled={disabled}>
+      <Button variant="primary" type="submit" disabled={!tcChecked}>
         Confirm order
       </Button>
     </Form>

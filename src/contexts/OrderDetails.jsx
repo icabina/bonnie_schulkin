@@ -32,6 +32,7 @@ export function OrderDetailsProvider(props) {
     scoops: new Map(),
     toppings: new Map(),
   });
+  // console.log("optionCounts", optionCounts);
   const zeroCurrency = formatCurrency(0);
   const [totals, setTotals] = useState({
     scoops: zeroCurrency,
@@ -55,8 +56,10 @@ export function OrderDetailsProvider(props) {
       const newOptionCounts = { ...optionCounts };
 
       // update option count for this item with the new value
-      const optionCountsMap = optionCounts[optionType];
+      const optionCountsMap = newOptionCounts[optionType];
+      // console.log("optionCountsMap 1", optionCountsMap);
       optionCountsMap.set(itemName, parseInt(newItemCount));
+      // console.log("optionCountsMap 2", optionCountsMap);
 
       setOptionCounts(newOptionCounts);
     }

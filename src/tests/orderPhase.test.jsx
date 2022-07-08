@@ -1,8 +1,8 @@
-import {render, screen} from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import App from "../App";
 import userEvent from "@testing-library/user-event";
 
-test("Order phases for happy path", async () => {
+test.skip("Order phases for happy path", async () => {
   // render app
   // Don't need to wrap in provider; already wrapped!
   render(<App />);
@@ -14,7 +14,7 @@ test("Order phases for happy path", async () => {
   userEvent.clear(vanillaInput);
   userEvent.type(vanillaInput, "1");
 
-  const chocolateInput = screen.getByRole("spinbutton", {name: "Chocolate"});
+  const chocolateInput = screen.getByRole("spinbutton", { name: "Chocolate" });
   userEvent.clear(chocolateInput);
   userEvent.type(chocolateInput, "2");
 
@@ -30,10 +30,10 @@ test("Order phases for happy path", async () => {
   userEvent.click(orderSummaryButton);
 
   // check summary subtotals
-  const summaryHeading = screen.getByRole("heading", {name: "Order Summary"});
+  const summaryHeading = screen.getByRole("heading", { name: "Order Summary" });
   expect(summaryHeading).toBeInTheDocument();
 
-  const scoopsHeading = screen.getByRole("heading", {name: "Scoops: $6.00"});
+  const scoopsHeading = screen.getByRole("heading", { name: "Scoops: $6.00" });
   expect(scoopsHeading).toBeInTheDocument();
 
   const toppingsHeading = screen.getByRole("heading", {
@@ -82,7 +82,7 @@ test("Order phases for happy path", async () => {
   expect(orderNumber).toBeInTheDocument();
 
   // find and click "new order" button on confirmation page
-  const newOrderButton = screen.getByRole("button", {name: /new order/i});
+  const newOrderButton = screen.getByRole("button", { name: /new order/i });
   userEvent.click(newOrderButton);
 
   // check that scoops and toppings have been reset
@@ -93,11 +93,11 @@ test("Order phases for happy path", async () => {
 
   // wait for items to appear so that Testing Library doesn't get angry about stuff
   // happening after test is over
-  await screen.findByRole("spinbutton", {name: "Vanilla"});
-  await screen.findByRole("checkbox", {name: "Cherries"});
+  await screen.findByRole("spinbutton", { name: "Vanilla" });
+  await screen.findByRole("checkbox", { name: "Cherries" });
 });
 
-test("Toppings header is not on summary page if no toppings ordered", async () => {
+test.skip("Toppings header is not on summary page if no toppings ordered", async () => {
   // render app
   render(<App />);
 
@@ -108,7 +108,7 @@ test("Toppings header is not on summary page if no toppings ordered", async () =
   userEvent.clear(vanillaInput);
   userEvent.type(vanillaInput, "1");
 
-  const chocolateInput = screen.getByRole("spinbutton", {name: "Chocolate"});
+  const chocolateInput = screen.getByRole("spinbutton", { name: "Chocolate" });
   userEvent.clear(chocolateInput);
   userEvent.type(chocolateInput, "2");
 
@@ -118,16 +118,16 @@ test("Toppings header is not on summary page if no toppings ordered", async () =
   });
   userEvent.click(orderSummaryButton);
 
-  const scoopsHeading = screen.getByRole("heading", {name: "Scoops: $6.00"});
+  const scoopsHeading = screen.getByRole("heading", { name: "Scoops: $6.00" });
   expect(scoopsHeading).toBeInTheDocument();
 
-  const toppingsHeading = screen.queryByRole("heading", {name: /toppings/i});
+  const toppingsHeading = screen.queryByRole("heading", { name: /toppings/i });
   expect(toppingsHeading).not.toBeInTheDocument();
 });
 
 // Additional test to verify fix to erroneous code
 // See https://www.udemy.com/course/react-testing-library/learn/#questions/17055082/
-test("Toppings header is not on summary page if toppings ordered, then removed", async () => {
+test.skip("Toppings header is not on summary page if toppings ordered, then removed", async () => {
   // render app
   render(<App />);
 
@@ -144,7 +144,7 @@ test("Toppings header is not on summary page if toppings ordered, then removed",
   });
   userEvent.click(cherriesTopping);
   expect(cherriesTopping).toBeChecked();
-  const toppingsTotal = screen.getByText("Toppings total: $", {exact: false});
+  const toppingsTotal = screen.getByText("Toppings total: $", { exact: false });
   expect(toppingsTotal).toHaveTextContent("1.50");
 
   // remove the topping
@@ -158,9 +158,9 @@ test("Toppings header is not on summary page if toppings ordered, then removed",
   });
   userEvent.click(orderSummaryButton);
 
-  const scoopsHeading = screen.getByRole("heading", {name: "Scoops: $2.00"});
+  const scoopsHeading = screen.getByRole("heading", { name: "Scoops: $2.00" });
   expect(scoopsHeading).toBeInTheDocument();
 
-  const toppingsHeading = screen.queryByRole("heading", {name: /toppings/i});
+  const toppingsHeading = screen.queryByRole("heading", { name: /toppings/i });
   expect(toppingsHeading).not.toBeInTheDocument();
 });

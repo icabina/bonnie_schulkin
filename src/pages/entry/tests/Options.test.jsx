@@ -21,7 +21,7 @@ test("Displays image for each toppings option from server", async () => {
   render(<Options optionType="toppings" />);
 
   // find images, expect 3 based on what msw returns
-  const images = await screen.findAllByRole("img", { name: /topping$/i });
+  const images = await screen.findAllByRole("img", { name: /topping$/i }); //ends with topping, dolar at end indicates end
   expect(images).toHaveLength(3);
 
   // check the actual alt text for the images
