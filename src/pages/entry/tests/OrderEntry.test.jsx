@@ -26,7 +26,7 @@ test("handles error for scoops and toppings routes", async () => {
   });
 });
 
-test.skip("disable order button if there are no scoops ordered", async () => {
+test("disable order button if there are no scoops ordered", async () => {
   render(<OrderEntry setOrderPhase={jest.fn()} />);
 
   // order button should be disabled at first, even before options load
@@ -39,7 +39,7 @@ test.skip("disable order button if there are no scoops ordered", async () => {
   });
   //   userEvent.clear(vanillaInput);
   //   userEvent.type(vanillaInput, "1");
-  console.log("vanillaInput", vanillaInput);
+  //   console.log("vanillaInput", vanillaInput);
   //   expect(orderButton).toBeEnabled();
 
   //   // expect button to be disabled again after removing scoop

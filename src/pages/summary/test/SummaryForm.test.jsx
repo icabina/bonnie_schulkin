@@ -8,6 +8,7 @@ import userEvent from "@testing-library/user-event";
 
 test.skip("Initial conditions", () => {
   render(<SummaryForm />);
+
   const checkbox = screen.getByRole("checkbox", {
     name: /terms and conditions/i,
   });
