@@ -57,6 +57,14 @@ test("update toppings subtotal when toppings change", async () => {
   expect(toppingsTotal).toHaveTextContent("1.50");
 });
 
+test("total starts at 0.00", async () => {
+  render(<OrderEntry />);
+  const grandTotal = screen.getByRole("heading", {
+    name: /grand total: \$/i, //REGEX
+  });
+  expect(grandTotal).toHaveTextContent("0.00");
+});
+
 describe("grand total", () => {
   test("grand total updates properly if scoop is added first", async () => {
     // Test that the total starts out at $0.00
